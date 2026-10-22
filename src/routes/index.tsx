@@ -13,6 +13,7 @@ import { seo } from "@/lib/seo";
 import {
   CtaBand,
   FaqList,
+  HelpCard,
   JsonLd,
   Reveal,
   ReviewCard,
@@ -39,6 +40,8 @@ import {
   acInstallation,
   heatPumpPremium,
   heatPumpOutdoor,
+  technicianThermostat,
+  elkMark,
 } from "@/data/images";
 
 export const Route = createFileRoute("/")({
@@ -349,31 +352,67 @@ function HomeComponent() {
         </div>
       </section>
 
-      {/* ---------- Why Elk ---------- */}
-      <section className="section">
-        <div className="container-x">
+      {/* ---------- Why Elk (navy split: photo + numbered reasons) ---------- */}
+      <section className="section-navy mesh-navy blueprint-navy relative overflow-hidden">
+        <img
+          src={elkMark}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-16 top-10 hidden w-[22rem] opacity-[0.06] [mask-image:radial-gradient(closest-side,black_55%,transparent)] lg:block"
+        />
+        <div className="container-x relative grid items-center gap-14 py-20 md:py-28 lg:grid-cols-[0.92fr_1.08fr]">
           <Reveal>
             <SectionHead
+              tone="navy"
               eyebrow="Why Elk"
               title="Why Homeowners Choose Elk."
               intro="Our business thrives on local trust, straightforward recommendations, and quality workmanship."
             />
-          </Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {PILLARS.map((p, i) => (
-              <Reveal key={p.title} delay={i * 60}>
-                <div className="card-premium flex h-full flex-col gap-4 p-8">
-                  <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-flame/15 to-frost/15">
-                    <p.icon className="h-5 w-5 text-flame" />
-                  </span>
-                  <h3 className="font-display text-lg font-bold">{p.title}</h3>
-                  <p className="flex-1 text-sm leading-relaxed text-muted-foreground">{p.copy}</p>
-                  <span className="font-display text-xs font-bold italic uppercase tracking-widest text-flame/70">
-                    0{i + 1}
-                  </span>
+            <div className="why-photo mt-10">
+              <img
+                src={technicianThermostat}
+                alt="Elk Heating & Air technician checking a home thermostat"
+                loading="lazy"
+                width={1200}
+                height={900}
+                className="aspect-[4/3] w-full object-cover"
+              />
+              <div className="why-photo-badge">
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-flame to-ember text-white">
+                  <ShieldCheck className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="font-display text-xs font-bold uppercase tracking-wide text-foreground">
+                    Honest work. Done right.
+                  </p>
+                  <p className="text-xs text-muted-foreground">HVAC experience since 2008</p>
                 </div>
-              </Reveal>
-            ))}
+              </div>
+            </div>
+          </Reveal>
+          <div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {PILLARS.map((p, i) => (
+                <Reveal key={p.title} delay={i * 70}>
+                  <div className="why-card group">
+                    <span className="why-card-num" aria-hidden="true">
+                      0{i + 1}
+                    </span>
+                    <span className="why-card-icon">
+                      <p.icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="mt-5 font-display text-lg font-bold text-white">{p.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-white/70">{p.copy}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal delay={300}>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <BookNowButton label="Book Now" className="btn btn-flame" />
+                <CallButton className="btn btn-outline-light" />
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -496,6 +535,7 @@ function HomeComponent() {
                 Read all FAQs
               </Link>
             </div>
+            <HelpCard className="mt-10 hidden lg:block" />
           </Reveal>
           <Reveal delay={100}>
             <FaqList faqs={FAQS.slice(0, 5)} />

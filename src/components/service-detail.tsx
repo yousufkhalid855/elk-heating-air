@@ -8,6 +8,7 @@ import {
   SectionHead,
   BookNowButton,
   CallButton,
+  TrustPanel,
 } from "@/components/shared";
 import type { ServiceInfo } from "@/data/site";
 import { BOOKING_URL, SITE_URL, TAGLINE } from "@/data/site";
@@ -74,6 +75,7 @@ export function ServiceDetail({
                 All services
               </Link>
             </div>
+            <TrustPanel className="mt-10" />
           </Reveal>
           <Reveal delay={100}>
             <div className="frame-premium relative h-full min-h-[22rem]">

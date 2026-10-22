@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { BadgeDollarSign, Handshake, MapPin, ShieldCheck, Thermometer, Wrench } from "lucide-react";
 
 import { seo } from "@/lib/seo";
 import {
@@ -9,7 +10,6 @@ import {
   SectionHead,
   BookNowButton,
   CallButton,
-  TickList,
 } from "@/components/shared";
 import { SITE_URL, TAGLINE } from "@/data/site";
 import { technicianThermostat, comfortableLivingRoom } from "@/data/images";
@@ -60,14 +60,17 @@ const TIMELINE = [
 
 const VALUES = [
   {
+    icon: ShieldCheck,
     title: "Honest Recommendations",
     copy: "We explain what your system needs in plain language and help you choose the right fix for your home and budget.",
   },
   {
+    icon: Wrench,
     title: "Quality Workmanship",
     copy: "Dependable repairs, careful installations, and attention to detail — the kind of work that helps systems last.",
   },
   {
+    icon: Handshake,
     title: "A Company That Stands Behind Its Promises",
     copy: "When we say we'll take care of it, we do. Dependable service and practical solutions are how we earn repeat business.",
   },
@@ -150,7 +153,7 @@ function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="section">
+      <section className="mesh-warm blueprint section border-t border-border">
         <div className="container-x">
           <Reveal>
             <SectionHead
@@ -158,28 +161,38 @@ function AboutPage() {
               title="The Standard Behind Every Visit."
             />
           </Reveal>
-          <div className="mt-12 space-y-10">
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
             {VALUES.map((v, i) => (
-              <Reveal key={v.title} delay={i * 60}>
-                <div className="grid gap-3 border-b border-border pb-8 md:grid-cols-[0.4fr_1fr] md:gap-10">
-                  <h3 className="font-display text-xl font-bold">{v.title}</h3>
-                  <p className="leading-relaxed text-muted-foreground">{v.copy}</p>
+              <Reveal key={v.title} delay={i * 80}>
+                <div className="value-card">
+                  <span className="value-card-num" aria-hidden="true">
+                    0{i + 1}
+                  </span>
+                  <span className="value-card-icon">
+                    <v.icon className="h-6 w-6" />
+                  </span>
+                  <h3 className="mt-6 font-display text-xl font-bold">{v.title}</h3>
+                  <p className="mt-3 leading-relaxed text-muted-foreground">{v.copy}</p>
                 </div>
               </Reveal>
             ))}
           </div>
           <Reveal>
-            <div className="mt-12">
-              <TickList
-                className="sm:grid sm:grid-cols-2 sm:gap-x-10"
-                items={[
-                  "Transparent pricing",
-                  "Precision repairs",
-                  "Total indoor comfort",
-                  "Dedicated local service",
-                ]}
-              />
-            </div>
+            <ul className="value-strip mt-10">
+              {[
+                { icon: BadgeDollarSign, label: "Transparent pricing" },
+                { icon: Wrench, label: "Precision repairs" },
+                { icon: Thermometer, label: "Total indoor comfort" },
+                { icon: MapPin, label: "Dedicated local service" },
+              ].map((item) => (
+                <li key={item.label} className="flex items-center gap-3">
+                  <span className="value-strip-icon">
+                    <item.icon className="h-4 w-4" />
+                  </span>
+                  <span className="font-display text-sm font-bold">{item.label}</span>
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
       </section>

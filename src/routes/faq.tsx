@@ -4,6 +4,7 @@ import { seo, breadcrumb } from "@/lib/seo";
 import {
   CtaBand,
   FaqList,
+  HelpCard,
   JsonLd,
   PageHero,
   Reveal,
@@ -64,10 +65,12 @@ function FaqPage() {
                 <BookNowButton label="Book Now" className="btn btn-flame" />
                 <CallButton className="btn btn-outline" />
               </div>
+              <HelpCard className="mt-10 hidden lg:block" />
             </div>
           </Reveal>
           <Reveal delay={100}>
             <FaqList faqs={FAQS} />
+            <HelpCard className="mt-10 lg:hidden" />
           </Reveal>
         </div>
       </section>

@@ -13,7 +13,7 @@ import {
   TickList,
 } from "@/components/shared";
 import { SITE_URL } from "@/data/site";
-import { technicianThermostat, furnaceTechnician } from "@/data/images";
+import { technicianThermostat, furnaceTechnician, acInstallation } from "@/data/images";
 
 export const Route = createFileRoute("/maintenance")({
   component: MaintenancePage,
@@ -167,27 +167,38 @@ function MaintenancePage() {
       <section className="section">
         <div className="container-x">
           <Reveal>
-            <div className="card-hairline relative overflow-hidden p-8 md:p-12">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(30rem 18rem at 90% 10%, oklch(0.58 0.21 28 / 0.06), transparent 60%), radial-gradient(26rem 16rem at 5% 95%, oklch(0.62 0.15 240 / 0.07), transparent 60%)",
-                }}
-              />
-              <div className="relative grid items-center gap-8 md:grid-cols-[auto_1fr_auto]">
-                <CalendarCheck className="h-12 w-12 text-flame" aria-hidden="true" />
-                <div>
-                  <h2 className="h-display text-2xl sm:text-3xl">A Simple Rhythm: Fall &amp; Spring.</h2>
-                  <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                    For most homes, the practical rhythm is heating equipment checked in the fall
-                    and cooling equipment checked in the spring — right before each system takes on
-                    its hardest months.
-                  </p>
-                </div>
-                <BookNowButton label="Book Maintenance" className="btn btn-flame" />
-              </div>
+            <div className="text-center">
+              <p className="eyebrow justify-center">
+                <CalendarCheck className="h-4 w-4" aria-hidden="true" /> When to schedule
+              </p>
+              <h2 className="h-display mx-auto mt-4 max-w-2xl text-3xl sm:text-4xl">A Simple Rhythm: Fall &amp; Spring.</h2>
+              <p className="lead mx-auto mt-4 max-w-2xl">
+                For most homes, the practical rhythm is heating equipment checked in the fall and
+                cooling equipment checked in the spring — right before each system takes on its
+                hardest months.
+              </p>
+            </div>
+            <div className="mt-12 grid gap-6 md:grid-cols-2">
+              {[
+                { season: "Fall", icon: Flame, title: "Heating check", copy: "Get your furnace or heat pump ready before the first Ohio cold snap.", img: furnaceTechnician },
+                { season: "Spring", icon: Snowflake, title: "Cooling check", copy: "Make sure your AC is ready before Miami Valley summer humidity arrives.", img: acInstallation },
+              ].map((s) => (
+                <article key={s.season} className="service-tile season-tile">
+                  <img src={s.img} alt="" aria-hidden="true" loading="lazy" className="service-tile-img" />
+                  <div aria-hidden="true" className="service-tile-shade" />
+                  <div className="relative flex h-full flex-col justify-end p-7 sm:p-9">
+                    <span className="service-tile-flag w-fit">{s.season}</span>
+                    <h3 className="h-display mt-4 flex items-center gap-3 text-2xl text-white sm:text-3xl">
+                      <s.icon className="h-6 w-6 text-ember" aria-hidden="true" />
+                      {s.title}
+                    </h3>
+                    <p className="mt-2 max-w-md text-sm leading-relaxed text-white/80">{s.copy}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="mt-10 text-center">
+              <BookNowButton label="Book Maintenance" className="btn btn-flame" />
             </div>
           </Reveal>
         </div>

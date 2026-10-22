@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { Phone, Quote, Wrench } from "lucide-react";
-import { BOOKING_URL, PHONE_DISPLAY, PHONE_TEL, TAGLINE, BUSINESS_NAME } from "@/data/site";
+import { CalendarCheck, Clock, Phone, Quote, ShieldCheck, Wrench } from "lucide-react";
+import { BOOKING_URL, HOURS, PHONE_DISPLAY, PHONE_TEL, TAGLINE, BUSINESS_NAME } from "@/data/site";
 import { cn } from "@/lib/utils";
 import elkMark from "@/assets/elk-mark.png";
 import heroHomeDusk from "@/assets/hero-home-dusk.jpg";
+import technicianThermostat from "@/assets/technician-thermostat.jpg";
 
 /* ---------- Scroll reveal ---------- */
 
@@ -224,6 +225,85 @@ export function PageHero({
         </div>
       </div>
     </section>
+  );
+}
+
+/* ---------- "Still have questions?" card ---------- */
+
+export function HelpCard({ className }: { className?: string }) {
+  return (
+    <div className={cn("help-card", className)}>
+      <div className="relative h-40 overflow-hidden">
+        <img
+          src={technicianThermostat}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="h-full w-full object-cover"
+        />
+        <div aria-hidden="true" className="help-card-fade absolute inset-0" />
+        <p className="eyebrow eyebrow-frost absolute bottom-4 left-6">Still have questions?</p>
+      </div>
+      <div className="p-6 sm:p-7">
+        <h3 className="h-display text-2xl text-white">Talk to a Real Local Team.</h3>
+        <p className="mt-2 text-sm leading-relaxed text-white/70">
+          No call centers, no runaround — you'll reach people who work on Dayton homes every day.
+        </p>
+        <a href={PHONE_TEL} className="help-card-phone mt-5">
+          <span className="help-card-phone-icon">
+            <Phone className="h-4 w-4" />
+          </span>
+          {PHONE_DISPLAY}
+        </a>
+        <ul className="mt-5 space-y-1.5 border-t border-white/10 pt-4 text-sm text-white/70">
+          {HOURS.map((h) => (
+            <li key={h.days} className="flex items-center gap-2">
+              <Clock className="h-3.5 w-3.5 flex-none text-frost" aria-hidden="true" />
+              <span className="font-semibold text-white">{h.days}:</span> {h.time}
+            </li>
+          ))}
+        </ul>
+        <BookNowButton label="Book Online" className="btn btn-flame mt-6 w-full" />
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Trust panel (service pages) ---------- */
+
+const TRUST_POINTS = [
+  {
+    icon: ShieldCheck,
+    title: "Honest recommendations",
+    copy: "Plain-language options for your home and budget.",
+  },
+  {
+    icon: Wrench,
+    title: "HVAC experience since 2008",
+    copy: "Serving the Dayton market since 2015.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Easy online booking",
+    copy: `Pick a time that works for you, or call ${PHONE_DISPLAY}.`,
+  },
+];
+
+export function TrustPanel({ className }: { className?: string }) {
+  return (
+    <ul className={cn("trust-panel", className)}>
+      {TRUST_POINTS.map((t) => (
+        <li key={t.title} className="flex items-start gap-4">
+          <span className="trust-panel-icon">
+            <t.icon className="h-5 w-5" />
+          </span>
+          <div>
+            <p className="font-display text-sm font-bold">{t.title}</p>
+            <p className="mt-0.5 text-sm text-muted-foreground">{t.copy}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
 
