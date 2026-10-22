@@ -111,6 +111,7 @@ function GalleryPage() {
     <>
       <PageHero
         eyebrow="Gallery"
+        image={acInstallation}
         title="Real Work, Real Equipment, Real Comfort."
         intro="A look at the systems we service and install across Greater Dayton — furnaces, air conditioners, heat pumps, and indoor air quality equipment in the homes we keep comfortable."
         breadcrumb={[

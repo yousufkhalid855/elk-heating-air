@@ -12,6 +12,7 @@ import {
   CallButton,
 } from "@/components/shared";
 import { FAQS } from "@/data/site";
+import { iaqHumidifier } from "@/data/images";
 
 export const Route = createFileRoute("/faq")({
   component: FaqPage,
@@ -41,6 +42,7 @@ function FaqPage() {
     <>
       <PageHero
         eyebrow="FAQ"
+        image={iaqHumidifier}
         title="Questions, Answered Straight."
         intro="The things Dayton homeowners ask us most — about services, scheduling, and how we work. If your question isn't here, call us at (937) 344-5445."
         breadcrumb={[

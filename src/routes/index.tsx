@@ -278,63 +278,73 @@ function HomeComponent() {
         </div>
       </section>
 
-      {/* ---------- Core services (alternating editorial rows) ---------- */}
+      {/* ---------- Core services (photo card grid) ---------- */}
       <section className="mesh-warm blueprint section border-y border-border">
         <div className="container-x">
-          <Reveal>
-            <SectionHead
-              eyebrow="What We Do"
-              title="Residential HVAC Services in Greater Dayton."
-              intro="From routine maintenance and emergency repairs to complete system replacements and indoor air quality solutions, Elk Heating & Air helps keep your home comfortable year-round."
-            />
-          </Reveal>
-          <div className="mt-14 space-y-16 md:space-y-20">
-            {CORE_SERVICES.map((service, i) => {
-              const img = SERVICE_IMAGES[service.slug];
-              return (
-                <Reveal key={service.slug}>
-                  <div
-                    className={`grid items-center gap-10 lg:grid-cols-2 ${
-                      i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-                    }`}
-                  >
-                    <div className="frame-premium relative">
-                      <span className="frame-flag">{SERVICE_FLAGS[service.slug] ?? "Service"}</span>
-                      <img
-                        src={img}
-                        alt={`${service.title} in Dayton, Ohio`}
-                        loading="lazy"
-                        width={1200}
-                        height={900}
-                        className="aspect-[4/3] w-full object-cover"
-                      />
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <Reveal>
+              <SectionHead
+                eyebrow="What We Do"
+                title="Residential HVAC Services in Greater Dayton."
+                intro="From routine maintenance and emergency repairs to complete system replacements and indoor air quality solutions, Elk Heating & Air helps keep your home comfortable year-round."
+              />
+            </Reveal>
+            <Reveal delay={80}>
+              <Link to="/services" className="btn btn-navy flex-none">
+                View All Services
+              </Link>
+            </Reveal>
+          </div>
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {CORE_SERVICES.map((service, i) => (
+              <Reveal key={service.slug} delay={(i % 2) * 80}>
+                <article className="service-tile group">
+                  <img
+                    src={SERVICE_IMAGES[service.slug]}
+                    alt={`${service.title} in Dayton, Ohio`}
+                    loading="lazy"
+                    width={1200}
+                    height={900}
+                    className="service-tile-img"
+                  />
+                  <div aria-hidden="true" className="service-tile-shade" />
+                  <div className="relative flex h-full flex-col justify-end p-7 sm:p-9">
+                    <div className="flex items-center gap-3">
+                      <span className="service-tile-num">0{i + 1}</span>
+                      <span className="service-tile-flag">{SERVICE_FLAGS[service.slug] ?? "Service"}</span>
                     </div>
-                    <div>
-                      <span className="num-badge">0{i + 1}</span>
-                      <h3 className="h-display mt-4 text-2xl sm:text-3xl">{service.title}</h3>
-                      <p className="mt-1 font-display text-sm font-bold uppercase tracking-[0.14em] text-flame">
-                        {service.tagline}
-                      </p>
-                      <p className="mt-4 leading-relaxed text-muted-foreground">{service.intro}</p>
-                      <TickList className="mt-6 sm:grid sm:grid-cols-2 sm:gap-x-8" items={service.items} />
-                      <div className="mt-7 flex flex-wrap items-center gap-5">
-                        <a
-                          href={BOOKING_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-navy"
+                    <h3 className="h-display mt-5 text-2xl text-white sm:text-3xl">{service.title}</h3>
+                    <p className="mt-1 font-display text-sm font-bold uppercase tracking-[0.14em] text-ember">
+                      {service.tagline}
+                    </p>
+                    <p className="mt-3 max-w-md text-sm leading-relaxed text-white/80">{service.intro}</p>
+                    <ul className="mt-5 flex flex-wrap gap-2">
+                      {service.items.slice(0, 4).map((item) => (
+                        <li
+                          key={item}
+                          className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[0.72rem] font-medium text-white/85 backdrop-blur"
                         >
-                          Book {service.navLabel.split(" ")[0]} Service
-                        </a>
-                        <Link to={service.path} className="link-arrow">
-                          Learn more
-                        </Link>
-                      </div>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-6 flex flex-wrap items-center gap-5">
+                      <a
+                        href={BOOKING_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-flame"
+                      >
+                        Book {service.navLabel.split(" ")[0]} Service
+                      </a>
+                      <Link to={service.path} className="link-arrow text-white">
+                        Learn more
+                      </Link>
                     </div>
                   </div>
-                </Reveal>
-              );
-            })}
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

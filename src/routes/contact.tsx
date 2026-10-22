@@ -19,6 +19,7 @@ import {
   PHONE_TEL,
   BOOKING_URL,
 } from "@/data/site";
+import { comfortableLivingRoom } from "@/data/images";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
@@ -85,6 +86,7 @@ function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
+        image={comfortableLivingRoom}
         title="Let's Get Your Home Comfortable Again."
         intro="Call, email, or send us a message — and when you're ready to schedule, online booking takes just a few minutes."
         breadcrumb={[

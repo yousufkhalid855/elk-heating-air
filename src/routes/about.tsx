@@ -4,6 +4,7 @@ import { seo } from "@/lib/seo";
 import {
   CtaBand,
   JsonLd,
+  PageHero,
   Reveal,
   SectionHead,
   BookNowButton,
@@ -76,37 +77,16 @@ function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="section-warm relative overflow-hidden border-b border-border">
-        <div className="container-x grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.1fr_0.9fr]">
-          <Reveal>
-            <p className="eyebrow">About Us</p>
-            <h1 className="h-display mt-4 text-4xl sm:text-5xl lg:text-[3.3rem]">
-              Honest Work. Done Right.
-            </h1>
-            <p className="lead mt-5 max-w-xl">
-              Elk Heating &amp; Air was built on one simple belief: homeowners deserve honest
-              recommendations, quality workmanship, dependable service, and a company that stands
-              behind its promises.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <BookNowButton label="Book Now" className="btn btn-flame" />
-              <CallButton className="btn btn-outline" />
-            </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <div className="frame-img">
-              <img
-                src={technicianThermostat}
-                alt="Elk Heating & Air technician checking a home thermostat"
-                loading="lazy"
-                width={1200}
-                height={1000}
-                className="aspect-[6/5] w-full object-cover"
-              />
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="About Us"
+        title="Honest Work. Done Right."
+        intro="Elk Heating & Air was built on one simple belief: homeowners deserve honest recommendations, quality workmanship, dependable service, and a company that stands behind its promises."
+        image={technicianThermostat}
+        imageAlt="Elk Heating & Air technician checking a home thermostat"
+      >
+        <BookNowButton label="Book Now" className="btn btn-flame" />
+        <CallButton className="btn btn-outline" />
+      </PageHero>
 
       {/* Story */}
       <section className="section">

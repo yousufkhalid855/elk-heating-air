@@ -12,6 +12,7 @@ import {
   BookNowButton,
 } from "@/components/shared";
 import { HCP_REVIEWS_URL, REVIEWS } from "@/data/site";
+import { heroHomeDusk } from "@/data/images";
 
 export const Route = createFileRoute("/reviews")({
   component: ReviewsPage,
@@ -41,6 +42,7 @@ function ReviewsPage() {
     <>
       <PageHero
         eyebrow="Reviews"
+        image={heroHomeDusk}
         title="See What Homeowners Are Saying."
         intro="Real feedback from real HouseCall Pro customers across Greater Dayton. We don't write reviews, and we don't invent them — here's what homeowners actually said after our visits."
         breadcrumb={[

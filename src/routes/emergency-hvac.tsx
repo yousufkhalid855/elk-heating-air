@@ -80,6 +80,7 @@ function EmergencyPage() {
     <>
       <PageHero
         eyebrow="Emergency HVAC"
+        image={furnaceTechnician}
         title="When Your HVAC Stops Working, We're Ready to Help."
         intro="A dead furnace or a failed air conditioner can't wait for a convenient moment. Elk Heating & Air provides emergency heating repairs and urgent diagnostics for homeowners across Greater Dayton."
         breadcrumb={[

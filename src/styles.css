@@ -697,3 +697,89 @@
     color: var(--flame);
   }
 }
+
+/* ---------- Subpage hero with background photo ---------- */
+@layer components {
+  .page-hero-overlay {
+    background:
+      linear-gradient(100deg, oklch(0.17 0.06 262 / 0.94) 0%, oklch(0.2 0.07 262 / 0.82) 45%, oklch(0.22 0.07 262 / 0.5) 100%),
+      linear-gradient(0deg, oklch(0.17 0.06 262 / 0.55), transparent 45%);
+  }
+  .page-hero-bg .lead {
+    color: oklch(0.96 0.006 95 / 0.82);
+  }
+  /* Pages pass the regular outline button into the hero; make it readable on the dark photo */
+  .page-hero-bg .btn-outline {
+    border-color: oklch(0.96 0.006 95 / 0.45);
+    color: oklch(0.96 0.006 95);
+  }
+  .page-hero-bg .btn-outline:hover {
+    border-color: oklch(0.96 0.006 95 / 0.8);
+    color: oklch(0.96 0.006 95);
+    background-color: oklch(0.96 0.006 95 / 0.1);
+  }
+}
+
+/* ---------- Home service tiles (photo with text overlay) ---------- */
+@layer components {
+  .service-tile {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    min-height: 34rem;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 1.4rem;
+    background-color: var(--navy-deep);
+    box-shadow: 0 24px 60px -28px oklch(0.17 0.06 262 / 0.55);
+  }
+  .service-tile-img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  .service-tile:hover .service-tile-img {
+    transform: scale(1.05);
+  }
+  .service-tile-shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, oklch(0.17 0.06 262 / 0.05) 0%, oklch(0.17 0.06 262 / 0.55) 38%, oklch(0.15 0.05 262 / 0.94) 78%);
+  }
+  .service-tile-num {
+    display: inline-flex;
+    height: 2.4rem;
+    width: 2.4rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    border: 1px solid oklch(1 0 0 / 0.25);
+    background: oklch(1 0 0 / 0.12);
+    color: white;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.85rem;
+    backdrop-filter: blur(6px);
+  }
+  .service-tile-flag {
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--flame), var(--ember));
+    color: white;
+    padding: 0.3rem 0.85rem;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .service-tile-img { transition: none; }
+    .service-tile:hover .service-tile-img { transform: none; }
+  }
+}

@@ -11,6 +11,7 @@ import {
   BookNowButton,
 } from "@/components/shared";
 import { COUNTIES, CITIES, SITE_URL } from "@/data/site";
+import { heatPumpOutdoor } from "@/data/images";
 
 export const Route = createFileRoute("/service-areas")({
   component: ServiceAreasPage,
@@ -58,6 +59,7 @@ function ServiceAreasPage() {
     <>
       <PageHero
         eyebrow="Service Areas"
+        image={heatPumpOutdoor}
         title="Serving Dayton & Surrounding Communities."
         intro="Elk Heating & Air proudly serves Dayton and the surrounding Miami Valley — twelve communities by name, eleven counties, and neighborhoods within roughly 50 miles."
         breadcrumb={[

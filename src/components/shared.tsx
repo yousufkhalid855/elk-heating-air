@@ -4,6 +4,7 @@ import { Phone, Quote, Wrench } from "lucide-react";
 import { BOOKING_URL, PHONE_DISPLAY, PHONE_TEL, TAGLINE, BUSINESS_NAME } from "@/data/site";
 import { cn } from "@/lib/utils";
 import elkMark from "@/assets/elk-mark.png";
+import heroHomeDusk from "@/assets/hero-home-dusk.jpg";
 
 /* ---------- Scroll reveal ---------- */
 
@@ -160,7 +161,7 @@ export function PageHero({
   eyebrow,
   title,
   intro,
-  image,
+  image = heroHomeDusk,
   imageAlt,
   breadcrumb,
   children,
@@ -174,32 +175,31 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="mesh-warm blueprint relative overflow-hidden border-b border-border">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-28 -top-28 h-[26rem] w-[26rem] rounded-full blur-3xl"
-        style={{ background: "radial-gradient(circle, oklch(0.58 0.21 28 / 0.2), transparent 70%)" }}
+    <section className="page-hero-bg relative isolate overflow-hidden border-b border-border">
+      {/* Full-bleed background photo with a navy overlay so white text stays readable */}
+      <img
+        src={image}
+        alt={imageAlt ?? ""}
+        aria-hidden={imageAlt ? undefined : true}
+        fetchPriority="high"
+        className="absolute inset-0 -z-20 h-full w-full object-cover"
       />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-32 -left-24 h-[22rem] w-[22rem] rounded-full blur-3xl"
-        style={{ background: "radial-gradient(circle, oklch(0.62 0.15 240 / 0.14), transparent 70%)" }}
-      />
-      <div className="container-x relative grid items-center gap-12 py-14 md:py-20 lg:grid-cols-[1.12fr_0.88fr]">
-        <div>
+      <div aria-hidden="true" className="page-hero-overlay absolute inset-0 -z-10" />
+      <div className="container-x relative py-20 md:py-28 lg:py-32">
+        <div className="max-w-2xl">
           {breadcrumb && (
             <nav
               aria-label="Breadcrumb"
-              className="mb-6 inline-flex items-center rounded-full border border-border bg-card/70 px-4 py-2 text-xs font-medium text-muted-foreground backdrop-blur"
+              className="mb-6 flex w-fit items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-medium text-white/75 backdrop-blur"
             >
               <ol className="flex flex-wrap items-center gap-1.5">
                 {breadcrumb.map((b, i) => (
                   <li key={b.path} className="flex items-center gap-1.5">
                     {i > 0 && <span aria-hidden="true">/</span>}
                     {i === breadcrumb.length - 1 ? (
-                      <span className="font-semibold text-foreground/85">{b.name}</span>
+                      <span className="font-semibold text-white">{b.name}</span>
                     ) : (
-                      <Link to={b.path} className="transition-colors hover:text-primary">
+                      <Link to={b.path} className="transition-colors hover:text-white">
                         {b.name}
                       </Link>
                     )}
@@ -208,34 +208,20 @@ export function PageHero({
               </ol>
             </nav>
           )}
-          <p className="eyebrow">{eyebrow}</p>
-          <h1 className="h-display mt-4 text-4xl sm:text-5xl lg:text-[3.4rem]">{title}</h1>
+          <p className="eyebrow eyebrow-frost">{eyebrow}</p>
+          <h1 className="h-display mt-4 text-4xl text-white sm:text-5xl lg:text-[3.6rem]">{title}</h1>
           {intro && <p className="lead mt-5 max-w-xl">{intro}</p>}
           {children && <div className="mt-8 flex flex-wrap items-center gap-4">{children}</div>}
         </div>
-        {image && (
-          <div className="relative hidden lg:block">
-            <Reveal delay={120}>
-              <div className="frame-premium relative aspect-[4/3]">
-                <img
-                  src={image}
-                  alt={imageAlt ?? ""}
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </Reveal>
-            <div className="card-hairline absolute -bottom-7 -left-8 flex items-center gap-3 px-5 py-4">
-              <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-flame/15 to-frost/15">
-                <Wrench className="h-5 w-5 text-flame" />
-              </span>
-              <div>
-                <p className="font-display text-xs font-bold uppercase tracking-wide">{TAGLINE}</p>
-                <p className="text-xs text-muted-foreground">Serving Greater Dayton since 2015</p>
-              </div>
-            </div>
+        <div className="absolute bottom-8 right-5 hidden items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur lg:flex">
+          <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-white/10">
+            <Wrench className="h-5 w-5 text-flame" />
+          </span>
+          <div>
+            <p className="font-display text-xs font-bold uppercase tracking-wide text-white">{TAGLINE}</p>
+            <p className="text-xs text-white/70">Serving Greater Dayton since 2015</p>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
