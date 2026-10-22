@@ -1,0 +1,699 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import "@fontsource-variable/archivo";
+@import "@fontsource-variable/archivo/wght-italic.css";
+@import "@fontsource-variable/work-sans";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Elk Heating & Air design system.
+ * Brand palette is derived from the Elk logo:
+ * deep glossy navy, flame red/ember orange (heat), frost blue (air),
+ * on a warm paper background.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-flame: var(--flame);
+  --color-ember: var(--ember);
+  --color-frost: var(--frost);
+  --color-navy-deep: var(--navy-deep);
+  --color-paper-warm: var(--paper-warm);
+  --font-display: "Archivo Variable", "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Work Sans Variable", "Work Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.988 0.005 95);
+  --foreground: oklch(0.27 0.05 262);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.27 0.05 262);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.27 0.05 262);
+  --primary: oklch(0.31 0.1 262);
+  --primary-foreground: oklch(0.985 0.003 95);
+  --secondary: oklch(0.945 0.015 250);
+  --secondary-foreground: oklch(0.31 0.1 262);
+  --muted: oklch(0.955 0.012 250);
+  --muted-foreground: oklch(0.5 0.04 260);
+  --accent: oklch(0.945 0.015 250);
+  --accent-foreground: oklch(0.31 0.1 262);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0.003 95);
+  --border: oklch(0.905 0.018 255);
+  --input: oklch(0.905 0.018 255);
+  --ring: oklch(0.45 0.09 262);
+  --flame: oklch(0.58 0.21 28);
+  --ember: oklch(0.72 0.16 55);
+  --frost: oklch(0.62 0.15 240);
+  --navy-deep: oklch(0.215 0.07 262);
+  --paper-warm: oklch(0.972 0.009 90);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Prevent horizontal page scroll on mobile (no sideways scrolling) */
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+    max-width: 100vw;
+  }
+
+  ::selection {
+    background-color: var(--flame);
+    color: white;
+  }
+}
+
+@layer components {
+  /* ---------- Layout ---------- */
+  .container-x {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 76rem;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .container-x {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-x {
+      padding-inline: 2rem;
+    }
+  }
+
+  .section {
+    padding-block: 5rem;
+  }
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 7rem;
+    }
+  }
+
+  .section-navy {
+    background-color: var(--navy-deep);
+    color: oklch(0.96 0.006 95);
+  }
+
+  .section-warm {
+    background-color: var(--paper-warm);
+  }
+
+  /* ---------- Typography ---------- */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--flame);
+  }
+
+  .eyebrow::before {
+    content: "";
+    display: inline-block;
+    height: 3px;
+    width: 2rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--flame), var(--ember));
+  }
+
+  .eyebrow-frost {
+    color: var(--frost);
+  }
+
+  .eyebrow-frost::before {
+    background: linear-gradient(90deg, var(--frost), oklch(0.72 0.13 225));
+  }
+
+  .h-display {
+    font-family: var(--font-display);
+    font-weight: 840;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  .h-display-caps {
+    text-transform: uppercase;
+  }
+
+  .lead {
+    color: var(--muted-foreground);
+    font-size: 1.075rem;
+    line-height: 1.75;
+  }
+
+  .prose-copy p {
+    color: var(--muted-foreground);
+    line-height: 1.8;
+  }
+  .prose-copy p + p {
+    margin-top: 1rem;
+  }
+  .prose-copy strong {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.65rem;
+    padding: 0.8rem 1.5rem;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease,
+      filter 0.2s ease;
+    white-space: nowrap;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn-flame {
+    background-image: linear-gradient(120deg, var(--flame), var(--ember));
+    color: white;
+    box-shadow: 0 10px 24px -10px oklch(0.58 0.21 28 / 0.55);
+  }
+  .btn-flame:hover {
+    filter: brightness(1.06);
+    box-shadow: 0 14px 28px -10px oklch(0.58 0.21 28 / 0.65);
+  }
+
+  .btn-navy {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    box-shadow: 0 10px 24px -12px oklch(0.31 0.1 262 / 0.5);
+  }
+  .btn-navy:hover {
+    background-color: oklch(0.26 0.1 262);
+  }
+
+  .btn-outline {
+    border: 1.5px solid oklch(0.27 0.05 262 / 0.22);
+    color: var(--foreground);
+    background-color: transparent;
+  }
+  .btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: oklch(0.31 0.1 262 / 0.04);
+  }
+
+  .btn-outline-light {
+    border: 1.5px solid oklch(0.96 0.006 95 / 0.35);
+    color: oklch(0.96 0.006 95);
+    background-color: transparent;
+  }
+  .btn-outline-light:hover {
+    border-color: oklch(0.96 0.006 95 / 0.7);
+    background-color: oklch(0.96 0.006 95 / 0.08);
+  }
+
+  /* ---------- Surfaces ---------- */
+  .card-hairline {
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    background-color: var(--card);
+    box-shadow: 0 1px 2px oklch(0.27 0.05 262 / 0.04), 0 12px 32px -18px oklch(0.27 0.05 262 / 0.16);
+  }
+
+  .frame-img {
+    border-radius: 1.25rem;
+    border: 1px solid oklch(0.27 0.05 262 / 0.08);
+    box-shadow: 0 24px 60px -28px oklch(0.27 0.05 262 / 0.35);
+    overflow: hidden;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background-color: var(--card);
+    padding: 0.45rem 0.95rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--foreground);
+  }
+
+  .tick-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+  .tick-item::before {
+    content: "";
+    margin-top: 0.45rem;
+    flex: none;
+    height: 7px;
+    width: 7px;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    background: linear-gradient(135deg, var(--flame), var(--ember));
+  }
+  .tick-item-frost::before {
+    background: linear-gradient(135deg, var(--frost), oklch(0.72 0.13 225));
+  }
+
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .link-arrow::after {
+    content: "→";
+    transition: transform 0.2s ease;
+  }
+  .link-arrow:hover::after {
+    transform: translateX(4px);
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-item {
+    border-radius: 0.9rem;
+    border: 1px solid var(--border);
+    background-color: var(--card);
+    transition: border-color 0.2s ease;
+  }
+  .faq-item[open] {
+    border-color: oklch(0.31 0.1 262 / 0.35);
+  }
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    list-style: none;
+    padding: 1.1rem 1.4rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary::after {
+    content: "+";
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--flame);
+    transition: transform 0.2s ease;
+    flex: none;
+  }
+  .faq-item[open] summary::after {
+    transform: rotate(45deg);
+  }
+  .faq-answer {
+    padding: 0 1.4rem 1.3rem;
+    color: var(--muted-foreground);
+    line-height: 1.75;
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* ---------- Preloader ---------- */
+  .preloader-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+    background:
+      radial-gradient(60rem 40rem at 70% -10%, oklch(0.31 0.1 262 / 0.65), transparent 60%),
+      radial-gradient(50rem 34rem at 12% 110%, oklch(0.42 0.12 30 / 0.28), transparent 60%),
+      var(--navy-deep);
+    color: oklch(0.96 0.006 95);
+    transition:
+      transform 0.7s cubic-bezier(0.76, 0, 0.24, 1),
+      opacity 0.45s ease;
+  }
+  .preloader-exit {
+    transform: translateY(-100%);
+    opacity: 0.4;
+  }
+  .preloader-mark {
+    width: 118px;
+    height: auto;
+    animation: elk-pop 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+    filter: drop-shadow(0 18px 40px oklch(0.1 0.05 262 / 0.7));
+  }
+  .preloader-ring {
+    position: absolute;
+    width: 158px;
+    height: 158px;
+    border-radius: 999px;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      var(--flame) 90deg,
+      var(--ember) 150deg,
+      var(--frost) 250deg,
+      transparent 320deg
+    );
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3.5px), black calc(100% - 3px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 3.5px), black calc(100% - 3px));
+    animation: elk-spin 1.2s linear infinite;
+  }
+  .preloader-word {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    overflow: hidden;
+  }
+  .preloader-word span {
+    display: inline-block;
+    animation: elk-letter 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+  .preloader-tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: oklch(0.96 0.006 95 / 0.55);
+    animation: elk-fade 0.6s 0.55s both;
+  }
+  .preloader-bar {
+    width: 190px;
+    height: 3px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: oklch(0.96 0.006 95 / 0.14);
+    animation: elk-fade 0.4s 0.35s both;
+  }
+  .preloader-bar span {
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--flame), var(--ember), var(--frost));
+    transform-origin: left;
+    animation: elk-bar 1.35s cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+}
+
+@keyframes elk-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(-26px) scale(0.86);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes elk-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes elk-letter {
+  0% {
+    opacity: 0;
+    transform: translateY(105%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes elk-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes elk-bar {
+  0% {
+    transform: scaleX(0.04);
+  }
+  70% {
+    transform: scaleX(0.82);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* ============================================================
+   Premium layer — mesh surfaces, blueprint grid, gradient
+   accents, premium cards and image frames.
+   ============================================================ */
+@layer components {
+  /* ---------- Mesh section backgrounds ---------- */
+  .mesh-navy {
+    background:
+      radial-gradient(52rem 34rem at 92% -12%, oklch(0.34 0.09 262 / 0.6), transparent 62%),
+      radial-gradient(44rem 30rem at -6% 110%, oklch(0.4 0.14 28 / 0.3), transparent 60%),
+      radial-gradient(40rem 28rem at 58% 128%, oklch(0.45 0.11 240 / 0.24), transparent 62%),
+      var(--navy-deep);
+  }
+
+  .mesh-warm {
+    background:
+      radial-gradient(46rem 30rem at 104% -8%, oklch(0.31 0.1 262 / 0.07), transparent 62%),
+      radial-gradient(38rem 26rem at -10% 112%, oklch(0.58 0.21 28 / 0.07), transparent 60%),
+      radial-gradient(30rem 22rem at 50% -20%, oklch(0.62 0.15 240 / 0.05), transparent 64%),
+      var(--paper-warm);
+  }
+
+  /* ---------- Blueprint grid overlay (HVAC plan aesthetic) ---------- */
+  .blueprint {
+    position: relative;
+  }
+  .blueprint::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, oklch(0.31 0.1 262 / 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.31 0.1 262 / 0.055) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(70% 90% at 50% 30%, black, transparent 92%);
+  }
+  .blueprint-navy::before {
+    background-image:
+      linear-gradient(to right, oklch(0.96 0.006 95 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.96 0.006 95 / 0.06) 1px, transparent 1px);
+  }
+
+  /* ---------- Gradient text accent ---------- */
+  .text-gradient-flame {
+    background-image: linear-gradient(100deg, var(--flame), var(--ember) 52%, var(--frost) 108%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---------- Premium cards ---------- */
+  .card-premium {
+    position: relative;
+    border-radius: 1.25rem;
+    border: 1px solid var(--border);
+    background-color: var(--card);
+    box-shadow: 0 1px 2px oklch(0.27 0.05 262 / 0.05), 0 18px 44px -24px oklch(0.27 0.05 262 / 0.22);
+    transition:
+      transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+  .card-premium::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--flame), var(--ember) 40%, var(--frost));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .card-premium:hover {
+    transform: translateY(-5px);
+    border-color: oklch(0.58 0.21 28 / 0.35);
+    box-shadow:
+      0 2px 4px oklch(0.27 0.05 262 / 0.06),
+      0 28px 60px -26px oklch(0.31 0.1 262 / 0.35),
+      0 18px 50px -24px oklch(0.58 0.21 28 / 0.35);
+  }
+  .card-premium:hover::before {
+    transform: scaleX(1);
+  }
+
+  /* ---------- Premium image frame with duotone wash ---------- */
+  .frame-premium {
+    position: relative;
+    border-radius: 1.4rem;
+    border: 1px solid oklch(0.27 0.05 262 / 0.08);
+    box-shadow: 0 28px 64px -30px oklch(0.27 0.05 262 / 0.4);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .frame-premium::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(to top, oklch(0.215 0.07 262 / 0.5), transparent 46%),
+      linear-gradient(135deg, oklch(0.58 0.21 28 / 0.16), transparent 40%, oklch(0.62 0.15 240 / 0.16) 96%);
+    mix-blend-mode: multiply;
+    transition: opacity 0.4s ease;
+  }
+  .frame-premium:hover::after {
+    opacity: 0.55;
+  }
+
+  /* ---------- Accent corner ribbon on images ---------- */
+  .frame-flag {
+    position: absolute;
+    left: 0;
+    top: 1.5rem;
+    z-index: 1;
+    border-radius: 0 0.6rem 0.6rem 0;
+    background: linear-gradient(90deg, var(--flame), var(--ember));
+    color: white;
+    padding: 0.5rem 1rem 0.5rem 1.25rem;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    box-shadow: 0 10px 24px -10px oklch(0.58 0.21 28 / 0.6);
+  }
+
+  /* ---------- Stat numerals ---------- */
+  .stat-num {
+    font-family: var(--font-display);
+    font-weight: 840;
+    font-style: italic;
+    font-size: 2.6rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- Glass chip for navy sections ---------- */
+  .glass-chip {
+    border-radius: 999px;
+    border: 1px solid oklch(0.96 0.006 95 / 0.16);
+    background: oklch(0.96 0.006 95 / 0.06);
+    padding: 0.45rem 1rem;
+    font-size: 0.85rem;
+    color: oklch(0.96 0.006 95 / 0.82);
+    backdrop-filter: blur(6px);
+  }
+
+  /* ---------- Numbered badge ---------- */
+  .num-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.4rem;
+    width: 2.4rem;
+    flex: none;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, oklch(0.58 0.21 28 / 0.14), oklch(0.62 0.15 240 / 0.12));
+    border: 1px solid oklch(0.58 0.21 28 / 0.22);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--flame);
+  }
+}
